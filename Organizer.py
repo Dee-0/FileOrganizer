@@ -23,8 +23,7 @@ def organize_files():
                 filename, file_extension = os.path.splitext("{}/{}".format(vars.PATH_TO_ORGANIZE,f))
                 if (file_extension[1:] not in directories):
                     create_folder(file_extension[1:])
-                else:
-                    move_file(f,file_extension[1:])
+                move_file(f,file_extension[1:])
         vars.CURRENT_STATE = "Complete!"
         GUI.state_label()
 
