@@ -5,14 +5,16 @@ from os import listdir
 from os.path import isfile, join
 import shutil
 import OrganizerVariables as vars
+import GUI
 
 def browse_files():
     tkinter.Tk().withdraw()
     vars.PATH_TO_ORGANIZE = filedialog.askdirectory()
+    GUI.update_path_gui()
 
 def organize_files():
     if vars.PATH_TO_ORGANIZE == "":
-        print("Path is empty.")
+        GUI.path_empty()
     else:
         directories = next(os.walk(vars.PATH_TO_ORGANIZE))[1]
         for f in listdir(vars.PATH_TO_ORGANIZE):
@@ -22,6 +24,8 @@ def organize_files():
                     create_folder(file_extension[1:])
                 else:
                     move_file(f,file_extension[1:])
+        vars.CURRENT_STATE = "Complete!"
+        GUI.state_label()
 
 def move_file(file_to_move,extension):
     shutil.move("{}/{}".format(vars.PATH_TO_ORGANIZE,file_to_move), "{}/{}/{}".format(vars.PATH_TO_ORGANIZE,extension,file_to_move))
