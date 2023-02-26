@@ -14,7 +14,8 @@ def browse_files():
 
 def organize_files():
     if vars.PATH_TO_ORGANIZE == "":
-        GUI.path_empty()
+        vars.PATH_TO_ORGANIZE = "Path is empty!"
+        GUI.update_path_gui()
     else:
         directories = next(os.walk(vars.PATH_TO_ORGANIZE))[1]
         for f in listdir(vars.PATH_TO_ORGANIZE):
